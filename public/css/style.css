@@ -1,0 +1,285 @@
+/* =========================================================
+   Smart Study Schedule — Design System
+   Signature motif: the weekly timetable grid, echoed in the
+   hero, section dividers, and background texture.
+   ========================================================= */
+
+:root{
+  --ink:        #1B2545;   /* deep navy ink — primary text / dark surfaces */
+  --ink-soft:   #4A5578;   /* secondary text on light surfaces */
+  --paper:      #EEF1F5;   /* cool pale blue-gray page background */
+  --paper-raise:#FFFFFF;   /* card surfaces */
+  --line:       #D7DCE3;   /* hairline grid lines — graph-paper feel */
+  --line-strong:#B9C1CE;
+
+  --amber:      #F0A93D;   /* highlighter marker — primary accent / CTA */
+  --amber-ink:  #7A5209;   /* text-safe amber for on-light small text */
+  --teal:       #3E8E82;   /* secondary accent — progress / success */
+  --coral:      #E2604F;   /* priority / alert accent */
+
+  --radius:     14px;
+  --radius-sm:  8px;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body:    "Inter", -apple-system, Segoe UI, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
+}
+
+*{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  font-family: var(--font-body);
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+h1,h2,h3,h4,.font-display{
+  font-family: var(--font-display);
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.eyebrow{
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.eyebrow::before{
+  content: "";
+  width: 18px;
+  height: 2px;
+  background: var(--amber);
+  display: inline-block;
+}
+
+a{ color: var(--teal); }
+a:hover{ color: var(--ink); }
+
+/* ---------- Navbar ---------- */
+.ss-navbar{
+  background: var(--paper-raise);
+  border-bottom: 1px solid var(--line-strong);
+}
+.ss-navbar .navbar-brand{
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ss-navbar .navbar-brand .brand-mark{
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: repeating-linear-gradient(45deg, var(--amber) 0 4px, var(--ink) 4px 5px);
+  display: inline-block;
+}
+.ss-navbar .nav-link{
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  padding: 0.5rem 0.9rem !important;
+}
+.ss-navbar .nav-link.active,
+.ss-navbar .nav-link:hover{ color: var(--ink); }
+.ss-navbar .nav-link.active{ text-decoration: underline; text-decoration-color: var(--amber); text-underline-offset: 6px; text-decoration-thickness: 2px; }
+
+/* ---------- Buttons ---------- */
+.btn-amber{
+  background: var(--amber);
+  border: 1px solid var(--amber);
+  color: var(--ink);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+}
+.btn-amber:hover{ background: #dd9829; border-color: #dd9829; color: var(--ink); }
+
+.btn-outline-ink{
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  background: transparent;
+}
+.btn-outline-ink:hover{ background: var(--ink); color: #fff; }
+
+/* ---------- Cards ---------- */
+.ss-card{
+  background: var(--paper-raise);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  height: 100%;
+}
+.ss-card .card-index{
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--amber-ink);
+}
+
+/* ---------- Section rhythm ---------- */
+.ss-section{ padding: 5.5rem 0; }
+.ss-divider{
+  border: none;
+  height: 1px;
+  background: var(--line-strong);
+  margin: 0;
+}
+
+/* ---------- Hero grid motif ---------- */
+.hero-grid-wrap{
+  background: var(--paper-raise);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+/* ---------- Mini weekly grid (hero demo) ---------- */
+.mini-grid{
+  display: grid;
+  grid-template-columns: 56px repeat(5, 1fr);
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+.mini-grid .cell{
+  border-radius: 4px;
+  min-height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-soft);
+  background: var(--paper);
+}
+.mini-grid .head{ background: transparent; color: var(--ink); font-weight: 600; }
+.mini-grid .time{ background: transparent; justify-content: flex-start; padding-left: 4px; color: var(--ink-soft); }
+.mini-grid .block{ color: var(--ink); font-weight: 600; }
+.block-amber{ background: var(--amber); }
+.block-teal{ background: var(--teal); color: #fff !important; }
+.block-coral{ background: var(--coral); color: #fff !important; }
+
+/* ---------- Stats strip ---------- */
+.stat-number{
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+}
+.stat-label{
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ---------- Footer ---------- */
+.ss-footer{
+  background: var(--ink);
+  color: #C9D0E0;
+  padding: 3rem 0 2rem;
+}
+.ss-footer a{ color: #E9ECF3; }
+.ss-footer .footer-brand{ font-family: var(--font-display); color: #fff; font-size: 1.2rem; }
+.ss-footer hr{ border-color: rgba(255,255,255,0.15); }
+.ss-footer small{ color: #8E97B5; }
+
+/* ---------- Timetable builder (schedule.html) ---------- */
+.builder-grid{
+  display: grid;
+  grid-template-columns: 64px repeat(7, 1fr);
+  gap: 3px;
+  background: var(--line-strong);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.builder-grid .g-cell{
+  background: var(--paper-raise);
+  min-height: 52px;
+  padding: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  position: relative;
+}
+.builder-grid .g-head{
+  background: var(--ink);
+  color: #fff;
+  min-height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+.builder-grid .g-time{
+  background: var(--paper);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 6px;
+  color: var(--ink-soft);
+}
+.g-slot{
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.g-slot:hover{ background: #F6EFE0; }
+.g-slot .task-chip{
+  border-radius: 5px;
+  padding: 3px 5px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--ink);
+  display: block;
+  overflow: hidden;
+}
+
+/* Priority color coding, reused everywhere for consistency */
+.priority-high   { background: var(--coral); color: #fff; }
+.priority-medium { background: var(--amber); color: var(--ink); }
+.priority-low    { background: var(--teal);  color: #fff; }
+
+.legend-dot{
+  width: 10px; height: 10px; border-radius: 3px; display: inline-block; margin-right: 6px;
+}
+
+/* ---------- Progress ring / bars ---------- */
+.ss-progress{
+  height: 10px;
+  border-radius: 6px;
+  background: var(--line);
+  overflow: hidden;
+}
+.ss-progress > div{
+  height: 100%;
+  background: var(--teal);
+}
+
+/* ---------- Utility ---------- */
+.text-teal{ color: var(--teal) !important; }
+.text-amber-ink{ color: var(--amber-ink) !important; }
+.bg-paper-raise{ background: var(--paper-raise) !important; }
+.shadow-hard{ box-shadow: 6px 6px 0 var(--ink); }
+.border-hairline{ border: 1px solid var(--line-strong) !important; }
+
+.accordion-button:not(.collapsed){
+  background: #FBF3E3;
+  color: var(--ink);
+}
+.accordion-button:focus{ box-shadow: none; border-color: var(--amber); }

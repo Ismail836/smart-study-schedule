@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Builder — Smart Study Schedule</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg ss-navbar sticky-top py-3">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><span class="brand-mark"></span>Smart Study Schedule</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
+        <li class="nav-item"><a class="nav-link active" href="schedule.html">BUILDER</a></li>
+        <li class="nav-item"><a class="nav-link" href="tips.html">STUDY TIPS</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">ABOUT</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="ss-section pb-4">
+  <div class="container">
+    <span class="eyebrow">The builder</span>
+    <h1 class="fw-medium mt-3 mb-2">Click any hour to plan it</h1>
+    <p class="fs-5 text-body-secondary mb-0" style="max-width:60ch;">
+      Every square is one hour, Monday through Sunday, 7 AM to 10 PM. Click an
+      empty square to add a subject; click a filled one to edit or remove it.
+      Your plan saves automatically through the Express API into SQLite.
+    </p>
+  </div>
+</header>
+
+<section class="pb-3">
+  <div class="container">
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3">
+        <div class="ss-card py-3">
+          <div class="stat-number" style="font-size:1.8rem;" id="statHours">0</div>
+          <div class="stat-label">Hours planned</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="ss-card py-3">
+          <div class="stat-number" style="font-size:1.8rem;" id="statTasks">0</div>
+          <div class="stat-label">Distinct subjects</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="ss-card py-3">
+          <div class="stat-number" style="font-size:1.8rem;" id="statBusiest">—</div>
+          <div class="stat-label">Busiest day</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="ss-card py-3 d-flex flex-column justify-content-center">
+          <div class="ss-progress mb-2"><div id="weekFillBar" style="width:0%;"></div></div>
+          <div class="stat-label" id="weekFillLabel">0% of the week planned</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+      <div class="d-flex gap-3 flex-wrap">
+        <small class="font-mono text-body-secondary"><span class="legend-dot" style="background:var(--coral)"></span>High priority</small>
+        <small class="font-mono text-body-secondary"><span class="legend-dot" style="background:var(--amber)"></span>Medium</small>
+        <small class="font-mono text-body-secondary"><span class="legend-dot" style="background:var(--teal)"></span>Low / flexible</small>
+      </div>
+      <button class="btn btn-outline-ink btn-sm" id="clearAllBtn">Clear entire week</button>
+    </div>
+
+    <div id="emptyState" class="alert d-none" style="background:#FBF3E3; border:1px solid var(--line-strong); border-radius:var(--radius-sm);">
+      Your week is empty. Click any square below to add your first study block and save it to the database.
+    </div>
+
+    <div class="table-responsive">
+      <div class="builder-grid" id="builderGrid" style="min-width:760px;"></div>
+    </div>
+  </div>
+</section>
+
+<section class="ss-section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="ss-card">
+          <h5 class="mb-2">Tip: protect your high-priority hours first</h5>
+          <p class="text-body-secondary mb-0">Block out exams and hard deadlines in coral before filling in lighter reading or revision time — it keeps the week honest about what actually needs to happen.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="ss-card">
+          <h5 class="mb-2">Tip: leave a little teal on purpose</h5>
+          <p class="text-body-secondary mb-0">A week planned at 100% capacity breaks the first time something runs long. Leaving a few low-priority, flexible blocks gives you somewhere to absorb the overflow, and the database keeps those gaps intact when you reload.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TASK MODAL ============ -->
+<div class="modal fade" id="taskModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-radius:var(--radius); border:1px solid var(--line-strong);">
+      <div class="modal-header">
+        <div>
+          <div class="eyebrow" style="font-size:0.68rem;">Edit slot</div>
+          <h5 class="modal-title mt-1" id="slotLabel">Mon · 8 AM</h5>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="taskForm">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="subject" class="form-label font-mono" style="font-size:0.78rem;">SUBJECT / TASK</label>
+            <input type="text" class="form-control" id="subject" name="subject" placeholder="e.g. Data Structures" required maxlength="28">
+          </div>
+          <div class="mb-3">
+            <label class="form-label font-mono" style="font-size:0.78rem;">PRIORITY</label>
+            <select class="form-select" id="priority" name="priority">
+              <option value="high">High — coral</option>
+              <option value="medium" selected>Medium — amber</option>
+              <option value="low">Low / flexible — teal</option>
+            </select>
+          </div>
+          <div class="mb-1">
+            <label for="notes" class="form-label font-mono" style="font-size:0.78rem;">NOTES (OPTIONAL)</label>
+            <textarea class="form-control" id="notes" name="notes" rows="2" maxlength="80" placeholder="Chapter, page range, deadline..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger btn-sm d-none me-auto" id="deleteTaskBtn">Remove block</button>
+          <button type="button" class="btn btn-outline-ink btn-sm" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-amber btn-sm">Save block</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer class="ss-footer">
+  <div class="container d-flex flex-wrap justify-content-between align-items-center">
+    <div class="footer-brand">Smart Study Schedule</div>
+    <small>© <span id="year"></span> Built for academic purposes.</small>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/schedule.js"></script>
+</body>
+</html>

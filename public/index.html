@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Study Schedule — Plan your week, not just your day</title>
+<meta name="description" content="A weekly planning tool built for students: block out study time, color-code priorities, and see your week at a glance.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar navbar-expand-lg ss-navbar sticky-top py-3">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><span class="brand-mark"></span>Smart Study Schedule</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link active" href="index.html">HOME</a></li>
+        <li class="nav-item"><a class="nav-link" href="schedule.html">BUILDER</a></li>
+        <li class="nav-item"><a class="nav-link" href="tips.html">STUDY TIPS</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">ABOUT</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><a class="btn btn-amber btn-sm px-3" href="schedule.html">Build my week</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="ss-section pb-4">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="eyebrow">Weekly planning, not to-do chaos</span>
+        <h1 class="display-4 fw-medium mt-3 mb-4" style="line-height:1.08;">
+          Your syllabus doesn't fit on a to-do list.<br>
+          <span class="fst-italic text-teal">So stop planning it like one.</span>
+        </h1>
+        <p class="fs-5 text-body-secondary mb-4" style="max-width:44ch;">
+          Smart Study Schedule turns your week into a single grid — every
+          subject, every deadline, color-coded by priority — so you always
+          know what's next without reopening five different apps.
+        </p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="schedule.html" class="btn btn-amber btn-lg px-4">Open the builder</a>
+          <a href="tips.html" class="btn btn-outline-ink btn-lg px-4">Read study tips</a>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="hero-grid-wrap">
+          <div class="d-flex justify-content-between align-items-center mb-2 px-1">
+            <span class="eyebrow" style="font-size:0.7rem;">This week</span>
+            <span class="font-mono text-body-secondary" style="font-size:0.72rem;">7:00 – 12:00</span>
+          </div>
+          <div class="mini-grid">
+            <div class="cell head"></div>
+            <div class="cell head">Mon</div>
+            <div class="cell head">Tue</div>
+            <div class="cell head">Wed</div>
+            <div class="cell head">Thu</div>
+            <div class="cell head">Fri</div>
+
+            <div class="cell time">8</div>
+            <div class="cell block block-coral">DSA</div>
+            <div class="cell"></div>
+            <div class="cell block block-amber">WebT</div>
+            <div class="cell"></div>
+            <div class="cell block block-coral">DB</div>
+
+            <div class="cell time">9</div>
+            <div class="cell block block-coral">DSA</div>
+            <div class="cell block block-teal">Read</div>
+            <div class="cell block block-amber">WebT</div>
+            <div class="cell"></div>
+            <div class="cell block block-coral">DB</div>
+
+            <div class="cell time">10</div>
+            <div class="cell"></div>
+            <div class="cell block block-teal">Read</div>
+            <div class="cell"></div>
+            <div class="cell block block-amber">OS</div>
+            <div class="cell"></div>
+
+            <div class="cell time">11</div>
+            <div class="cell block block-amber">Lab</div>
+            <div class="cell"></div>
+            <div class="cell block block-teal">Revise</div>
+            <div class="cell block block-amber">OS</div>
+            <div class="cell block block-teal">Free</div>
+          </div>
+          <div class="d-flex gap-3 mt-3 px-1 flex-wrap">
+            <small class="font-mono text-body-secondary"><span class="legend-dot" style="background:var(--coral)"></span>High priority</small>
+            <small class="font-mono text-body-secondary"><span class="legend-dot" style="background:var(--amber)"></span>Medium</small>
+            <small class="font-mono text-body-secondary"><span class="legend-dot" style="background:var(--teal)"></span>Low / flexible</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<hr class="ss-divider">
+
+<!-- ============ STATS STRIP ============ -->
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center g-4">
+      <div class="col-6 col-md-3">
+        <div class="stat-number">7</div>
+        <div class="stat-label">Days visualised at once</div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-number">15</div>
+        <div class="stat-label">Hourly slots per day</div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Priority levels</div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-number">0</div>
+        <div class="stat-label">Sign-ups required</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="ss-divider">
+
+<!-- ============ FEATURES ============ -->
+<section class="ss-section">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-7">
+        <span class="eyebrow">Why a grid, not a list</span>
+        <h2 class="fw-medium mt-3">Built around how a week actually looks</h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="ss-card">
+          <div class="card-index">01</div>
+          <h5 class="mt-2 mb-3">Click, don't type-scroll</h5>
+          <p class="text-body-secondary mb-0">Tap any hour on the grid to add a subject, set a priority, and jot a quick note — no forms buried three menus deep.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ss-card">
+          <div class="card-index">02</div>
+          <h5 class="mt-2 mb-3">Color tells you what matters</h5>
+          <p class="text-body-secondary mb-0">High-priority sessions stand out in coral, medium in amber, low-pressure or flexible time in teal. Scan, don't read.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ss-card">
+          <div class="card-index">03</div>
+          <h5 class="mt-2 mb-3">Your plan stays put</h5>
+          <p class="text-body-secondary mb-0">The builder saves through the server into SQLite, so closing the tab doesn't cost you the week you just planned.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="ss-divider">
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="ss-section bg-paper-raise">
+  <div class="container">
+    <span class="eyebrow">Three steps</span>
+    <h2 class="fw-medium mt-3 mb-5">From blank week to full plan</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span class="font-mono fw-semibold text-amber-ink">Step 1</span>
+        </div>
+        <h5>Open the builder</h5>
+        <p class="text-body-secondary">Land on a blank 7-day grid, hours 7 AM to 10 PM, ready for input.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span class="font-mono fw-semibold text-amber-ink">Step 2</span>
+        </div>
+        <h5>Block out your subjects</h5>
+        <p class="text-body-secondary">Click a slot, name the subject, choose a priority, save. Repeat for the week.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span class="font-mono fw-semibold text-amber-ink">Step 3</span>
+        </div>
+        <h5>Check your week-fill</h5>
+        <p class="text-body-secondary">A live bar shows how much of the week is planned versus still open, reflecting what is saved in the database.</p>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <a href="schedule.html" class="btn btn-amber btn-lg px-5">Start planning</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="ss-footer">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-md-4">
+        <div class="footer-brand mb-2">Smart Study Schedule</div>
+        <p class="small mb-0">A semester project for Web Technologies — built with HTML, CSS, JavaScript and Bootstrap 5.</p>
+      </div>
+      <div class="col-md-2">
+        <div class="text-white fw-semibold mb-2 font-mono" style="font-size:0.8rem;">PAGES</div>
+        <ul class="list-unstyled small">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="schedule.html">Builder</a></li>
+          <li><a href="tips.html">Study tips</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <div class="text-white fw-semibold mb-2 font-mono" style="font-size:0.8rem;">MORE</div>
+        <ul class="list-unstyled small">
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <div class="text-white fw-semibold mb-2 font-mono" style="font-size:0.8rem;">LEGEND</div>
+        <div class="small"><span class="legend-dot" style="background:var(--coral)"></span>High priority</div>
+        <div class="small"><span class="legend-dot" style="background:var(--amber)"></span>Medium priority</div>
+        <div class="small"><span class="legend-dot" style="background:var(--teal)"></span>Low priority</div>
+      </div>
+    </div>
+    <hr class="my-4">
+    <small>© <span id="year"></span> Smart Study Schedule. Built for academic purposes.</small>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
