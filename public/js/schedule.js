@@ -57,7 +57,14 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error("Failed to save block.");
+    if (!res.ok) {
+      let msg = "Failed to save block.";
+      try {
+        const err = await res.json();
+        if (err.error) msg = "Failed to save block: " + err.error;
+      } catch (e) {}
+      throw new Error(msg);
+    }
     return res.json();
   }
 

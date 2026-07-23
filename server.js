@@ -59,12 +59,11 @@ app.put("/api/tasks/:day/:hour", (req, res) => {
   }
 
   db.prepare(
-    `INSERT INTO tasks (day, hour, subject, priority, notes)
-     VALUES (@day, @hour, @subject, @priority, @notes)
-     ON CONFLICT(day, hour) DO UPDATE SET
-       subject = excluded.subject,
-       priority = excluded.priority,
-       notes = excluded.notes`
+    `INSERT OR REPLACE INTO tasks (id, day, hour, subject, priority, notes)
+     VALUES (
+       (SELECT id FROM tasks WHERE day = @day AND hour = @hour),
+       @day, @hour, @subject, @priority, @notes
+     )`
   ).run({
     day,
     hour: Number(hour),
